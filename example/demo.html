@@ -5,11 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>demo</title>
+    <style>
+        .d-inline-block {
+            display: inline-block
+        }
+    </style>
 </head>
 
 <body>
-
+    <div class="d-inline-block" id="sort1">
+        <div>list 1</div>
+        <div>list 2</div>
+        <div>list 3</div>
+        <div>list 4</div>
+        <div>list 5</div>
+    </div>
+    <div class="d-inline-block" id="sort2">
+        <div>list 1</div>
+        <div>list 2</div>
+        <div>list 3</div>
+        <div>list 4</div>
+        <div>list 5</div>
+    </div>
     <script src="../dist/dragpos.js"></script>
+    <script>
+        const test1 = new DragPos("#sort1")
+        const test2 = test1.create({ ele: "#sort2", backgroundColor: "#333", fontColor: "white" })
+    </script>
 </body>
 
 </html>

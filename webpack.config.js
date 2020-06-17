@@ -5,8 +5,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     mode: process.env.NODE_ENV == "production" ? "production" : "development",
+    devtool: 'inline-source-map',
     entry: {
-        dragpos: "./src/index.js",
+        dragpos: "./src/index.ts",
     },
     output: {
         filename: "[name].js",
@@ -14,6 +15,11 @@ module.exports = {
     },
     module: {
         rules: [
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            },
             {
                 test: /\.m?js$/,
                 exclude: /(node_modules|bower_components)/,
@@ -44,6 +50,7 @@ module.exports = {
             path.join(__dirname, "src"),
             path.join(__dirname, "node_modules"),
             "node_modules",
-        ]
+        ],
+        extensions: [".ts", ".js"],
     }
 }

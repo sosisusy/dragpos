@@ -2,7 +2,7 @@
   "name": "dragpos",
   "version": "0.0.0",
   "description": "리스트 재배치 라이브러리",
-  "main": "dist/index.js",
+  "main": "./lib/index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack --config webpack.config.js",
     "prod": "cross-env NODE_ENV=production webpack --config webpack.config.js",
@@ -32,11 +32,16 @@
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.14.1",
     "sass-loader": "^8.0.2",
+    "ts-loader": "^7.0.5",
+    "typescript": "^3.9.5",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
+    "@types/crypto-js": "^3.1.47",
+    "@types/lodash": "^4.14.155",
     "axios": "^0.19.2",
+    "crypto-js": "^4.0.0",
     "lodash": "^4.17.15"
   }
 }
