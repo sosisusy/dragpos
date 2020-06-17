@@ -1,11 +1,12 @@
 const path = require("path")
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 
 module.exports = {
     mode: process.env.NODE_ENV == "production" ? "production" : "development",
     entry: {
-        index: "./src/index.js",
+        dragpos: "./src/index.js",
     },
     output: {
         filename: "[name].js",
@@ -35,7 +36,8 @@ module.exports = {
         ],
     },
     plugins: [
-        new MiniCssExtractPlugin()
+        new MiniCssExtractPlugin(),
+        new CleanWebpackPlugin(),
     ],
     resolve: {
         modules: [
