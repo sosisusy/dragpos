@@ -24,5 +24,6 @@ export interface DragPosOptions {
     onDragStart?: Function,
     // 리스트에 마우스 올릴 시 커서
     overCursor?: string,
+    group: string,
     /** todo */
 }
