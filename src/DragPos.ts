@@ -16,7 +16,7 @@ class DragPos {
     }
 
     // 추가 생성
-    create(option: DragPosOptions) {
+    new(option: DragPosOptions) {
         this.runDragPos(option)
     }
 
@@ -36,11 +36,11 @@ class DragPos {
             style.id = styleId
 
             // 스타일 설정
-            if (option.backgroundColor) styleOption += `background-color:${option.backgroundColor}`
-            if (option.fontColor) styleOption += `font-color:${option.fontColor}`
-            if (option.fontSize) styleOption += `font-size:${option.fontSize}`
+            if (option.backgroundColor) styleOption += `background-color:${option.backgroundColor};`
+            if (option.fontColor) styleOption += `color:${option.fontColor};`
+            if (option.fontSize) styleOption += `font-size:${option.fontSize}px;`
 
-            style.innerHTML = `[data-dragpos-key=${option.key}] .${DRAG_EVENT_CLASS}{${styleOption}}`
+            style.innerHTML = `[data-dragpos-key="${option.key}"] .${DRAG_EVENT_CLASS}{${styleOption}}`
             document.head.appendChild(style)
         }
     }

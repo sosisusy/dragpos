@@ -2,7 +2,7 @@
   "name": "dragpos",
   "version": "0.0.0",
   "description": "리스트 재배치 라이브러리",
-  "main": "./lib/index.js",
+  "main": "./dist/dragpos.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack --config webpack.config.js",
     "prod": "cross-env NODE_ENV=production webpack --config webpack.config.js",

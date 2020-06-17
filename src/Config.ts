@@ -8,9 +8,21 @@ export interface DragPosOptions {
     // drag target container
     ele?: HTMLElement | string,
     // set drag event background color
-    backgroundColor?: null,
+    backgroundColor?: string,
     // set drag event font color
-    fontColor?: null,
+    fontColor?: string,
     // set drag event font size
-    fontSize?: null,
+    fontSize?: number,
+
+    /** todo */
+    // animation rate (ms)
+    animation?: number,
+    // 폰트 설정
+    fontFamily?: string,
+    // 이벤트 리스너
+    onDrop?: Function,
+    onDragStart?: Function,
+    // 리스트에 마우스 올릴 시 커서
+    overCursor?: string,
+    /** todo */
 }
