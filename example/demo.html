@@ -13,7 +13,7 @@
         <div class="container">
             <div class="content">
                 <div class="example">
-                    <div class="d-inline-block list" id="example1">
+                    <div class="list" id="example1">
                         <div>list 1</div>
                         <div>list 2</div>
                         <div>list 3</div>
@@ -22,7 +22,16 @@
                     </div>
                 </div>
                 <div class="example">
-                    <div class="d-inline-block list" id="example2">
+                    <div class="list horizontal" id="example2">
+                        <div>list 1</div>
+                        <div>list 2</div>
+                        <div>list 3</div>
+                        <div>list 4</div>
+                        <div>list 5</div>
+                    </div>
+                </div>
+                <div class="example">
+                    <div class="list" id="example3">
                         <div>list 1</div>
                         <div>list 2</div>
                         <div>list 3</div>
@@ -36,8 +45,9 @@
     <script src="../dist/dragpos.js"></script>
     <script>
         const dragpos = new DragPos
-        dragpos.new({ ele: "#example1" })
-        dragpos.new({ ele: "#example2", backgroundColor: "#e0e0e0", fontSize: 20, fontColor: "blue" })
+        dragpos.new({ ele: "#example1", group: "test" })
+        dragpos.new({ ele: "#example2", backgroundColor: "#e0e0e0", fontColor: "blue", group: "test2" })
+        dragpos.new({ ele: "#example3", backgroundColor: "#e0e0e0", fontColor: "blue" })
     </script>
 </body>
 

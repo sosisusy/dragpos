@@ -1,7 +1,9 @@
 declare const Utils: {
     /**
-     * search 배열 안의 요소에 해당하는 노드를 찾을 때까지 부모 노드를 검색
+     * children 안의 요소에 해당할때까지 상위 노드 검색
      */
-    searchParentNode(search: HTMLCollection, ele: HTMLElement, cnt?: number): HTMLElement | boolean;
+    searchParentNode(children: HTMLCollection, ele: HTMLElement, cnt?: number): HTMLElement | boolean;
+    searchChildIndex(children: HTMLCollection, ele: HTMLElement): number;
+    enableDragGroup(): void;
 };
 export default Utils;

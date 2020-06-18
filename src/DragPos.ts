@@ -1,10 +1,15 @@
 import _ from "lodash"
-import { DRAG_EVENT_CLASS, DragPosOptions } from "./Config"
+import {
+    DRAG_START_CLASS,
+    DragPosOptions,
+    DRAG_DEFAULT_STYLE_ID,
+    DRAG_KEY_ATTRIBUTE
+} from "./Config"
 import DragEvent from "./DragEvent"
 
 import CryptoJS from "crypto-js"
 
-let INCREMENT = 1
+let primaryIndex = 1
 
 class DragPos {
 
@@ -20,9 +25,36 @@ class DragPos {
         this.runDragPos(option)
     }
 
+    // 옵션 정보 추가
+    appendStore(option: DragPosOptions) {
+        let store = window.dragposOptionStore,
+            primaryKey = option.key as string
+
+        store.options.push(option)
+        if (option.group) {
+            if (!store.group[option.group]) store.group[option.group] = []
+            store.group[option.group].push(primaryKey)
+        }
+        store.mapping[primaryKey] = store.options.length - 1
+    }
+
+    /**
+     * 기본 스타일 적용
+     */
+    applyDefaultStyle() {
+        let style = document.querySelector(`.${DRAG_DEFAULT_STYLE_ID}`)
+
+        if (style) return
+
+        style = document.createElement("style")
+        style.id = DRAG_DEFAULT_STYLE_ID
+
+        style.innerHTML = ``
+        document.head.appendChild(style)
+    }
+
     /**
      * apply style option
-     * @param {object} option 
      */
     applyStyleOption(option: DragPosOptions) {
         let eleId = (option.ele as HTMLElement).id,
@@ -40,14 +72,13 @@ class DragPos {
             if (option.fontColor) styleOption += `color:${option.fontColor};`
             if (option.fontSize) styleOption += `font-size:${option.fontSize}px;`
 
-            style.innerHTML = `[data-dragpos-key="${option.key}"] .${DRAG_EVENT_CLASS}{${styleOption}}`
+            style.innerHTML = `[${DRAG_KEY_ATTRIBUTE}="${option.key}"] .${DRAG_START_CLASS}{${styleOption}}`
             document.head.appendChild(style)
         }
     }
 
     /**
      * 동작
-     * @param {Object} option 
      */
     runDragPos(option: DragPosOptions = {}) {
         let ele = option.ele as HTMLElement | string
@@ -59,21 +90,24 @@ class DragPos {
         }
 
         // 고유키 설정
-        option.key = CryptoJS.AES.encrypt(`${INCREMENT++}}`, "12asdasd3").toString().replace(/\W/g, "").substr(10, 15)
-        ele.setAttribute("data-dragpos-key", option.key)
+        option.key = CryptoJS.AES.encrypt(`${primaryIndex++}}`, "sosisusy/dragpos").toString().replace(/\W/g, "").substr(10, 15)
+        ele.setAttribute(DRAG_KEY_ATTRIBUTE, option.key)
 
         // 스타일 적용
+        this.applyDefaultStyle()
         this.applyStyleOption(option)
 
         switch (ele.tagName) {
             default:
                 _.map(ele.children, (child) => {
-                    child.setAttribute("draggable", "true")
+                    child.addEventListener("mouseover", (e) => DragEvent.handleMouseOver(e, option))
                     child.addEventListener("dragstart", (e) => DragEvent.handleDragStart(e, option))
                     child.addEventListener("dragover", (e) => DragEvent.handleDragOver(e, option))
                     child.addEventListener("dragend", (e) => DragEvent.handleDragEnd(e, option))
                 })
         }
+
+        this.appendStore(option)
     }
 }
 

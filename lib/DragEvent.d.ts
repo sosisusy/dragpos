@@ -1,5 +1,6 @@
 import { DragPosOptions } from "./Config";
 declare const DragEvent: {
+    handleMouseOver(e: Event, option: DragPosOptions): void;
     /**
      * drag start
      */

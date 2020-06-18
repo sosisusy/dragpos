@@ -1,13 +1,48 @@
 import Utils from "./Utils"
-import { DRAG_EVENT_CLASS, DragPosOptions } from "./Config"
+import { DRAG_START_CLASS, DragPosOptions } from "./Config"
+import _ from "lodash"
 
 const DragEvent = {
+    // mouse over
+    handleMouseOver(e: Event, option: DragPosOptions) {
+        const store = window.dragposOptionStore,
+            group = store.group,
+            mapping = store.mapping,
+            options = store.options
+
+        if (option.group) {
+            _.map(group[option.group], (primaryKey) => {
+                let optionIndex = mapping[primaryKey],
+                    currentOption = options[optionIndex],
+                    currentContainer = currentOption.ele as HTMLElement
+
+                _.map(currentContainer.children, (ele) => {
+                    ele.setAttribute("draggable", "true")
+                })
+            })
+        } else {
+            _.map(group, (groupChild) => {
+                _.map(groupChild, (primaryKey) => {
+                    let optionIndex = mapping[primaryKey],
+                        currentOption = options[optionIndex],
+                        currentContainer = currentOption.ele as HTMLElement
+
+                    _.map(currentContainer.children, (ele) => {
+                        ele.setAttribute("draggable", "true")
+                    })
+                })
+                console.log(groupChild)
+            })
+        }
+    },
+
     /**
      * drag start
      */
     handleDragStart(e: Event, option: DragPosOptions) {
-        let target = e.target as HTMLElement
-        target.classList.add(DRAG_EVENT_CLASS)
+        let container = option.ele as HTMLElement,
+            target = Utils.searchParentNode(container.children, e.target as HTMLElement) as HTMLElement
+        target.classList.add(DRAG_START_CLASS)
     },
 
     /**
@@ -16,21 +51,22 @@ const DragEvent = {
     handleDragOver(e: Event, option: DragPosOptions) {
         e.preventDefault()
         let container = option.ele as HTMLElement,
-            target = Utils.searchParentNode(container.children, e.target as HTMLElement) as HTMLElement,
-            moveTarget = document.querySelector(`.${DRAG_EVENT_CLASS}`) as HTMLElement
+            containerChildren = container.children,
+            target = Utils.searchParentNode(containerChildren, e.target as HTMLElement) as HTMLElement,
+            moveTarget = document.querySelector(`.${DRAG_START_CLASS}`) as HTMLElement
 
+        // 노드찾기 실패 시 이벤트 무시
         if (!target) return
 
-        // 위치 값
-        let { x: targetX, y: targetY } = target.getBoundingClientRect(),
-            { x: moveTargetX, y: moveTargetY } = moveTarget.getBoundingClientRect()
-
+        // 위치 변경
         if (moveTarget !== target) {
-            // 이동할 노드가 타겟 이전에 위치 할 경우
-            if (targetX < moveTargetX || targetY < moveTargetY) {
-                container.insertBefore(moveTarget, target)
+            let targetIndex = Utils.searchChildIndex(containerChildren, target),
+                moveTargetIndex = Utils.searchChildIndex(containerChildren, moveTarget)
+
+            if (targetIndex > moveTargetIndex) {
+                container.insertBefore(moveTarget, containerChildren[targetIndex + 1])
             } else {
-                container.insertBefore(moveTarget, target.nextSibling)
+                container.insertBefore(moveTarget, target)
             }
         }
     },
@@ -39,8 +75,8 @@ const DragEvent = {
      * drag end
      */
     handleDragEnd(e: Event, option: DragPosOptions) {
-        let target = e.target as HTMLElement
-        target.classList.remove("dragpos__drag")
+        let moveTarget = document.querySelector(`.${DRAG_START_CLASS}`) as HTMLElement
+        moveTarget.classList.remove(DRAG_START_CLASS)
     },
 }
 

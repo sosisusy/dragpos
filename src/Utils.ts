@@ -1,21 +1,33 @@
 import _ from "lodash"
-
-// 묵시적 반복문 최대 반복 수
-const LOOP_LIMIT = 100
-
+import { LOOP_LIMIT } from "./Config"
 
 const Utils = {
-
     /**
-     * search 배열 안의 요소에 해당하는 노드를 찾을 때까지 부모 노드를 검색
+     * children 안의 요소에 해당할때까지 상위 노드 검색
      */
-    searchParentNode(search: HTMLCollection, ele: HTMLElement, cnt = 0): HTMLElement | boolean {
+    searchParentNode(children: HTMLCollection, ele: HTMLElement, cnt = 0): HTMLElement | boolean {
         let parent = ele.parentNode as HTMLElement
 
-        if (_.indexOf(search, ele) !== -1) return ele
+        if (!parent) return false
+
+        if (_.indexOf(children, ele) !== -1) return ele
         if (cnt >= LOOP_LIMIT) return false
-        return this.searchParentNode(search, parent, ++cnt)
-    }
+        return this.searchParentNode(children, parent, ++cnt)
+    },
+
+    // 노드 인덱스 반환
+    searchChildIndex(children: HTMLCollection, ele: HTMLElement): number {
+        let childIndex = -1
+        _.map(children, (child, i) => {
+            if (child === ele) childIndex = i
+        })
+        return childIndex
+    },
+
+    // 해당 그룹 드래그 활성화
+    enableDragGroup() {
+
+    },
 }
 
 export default Utils
