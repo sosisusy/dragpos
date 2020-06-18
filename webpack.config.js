@@ -4,13 +4,19 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
+let minifyGroup = {}
+if (process.env.NODE_ENV == "production") {
+    minifyGroup = {
+        "dragpos.min": "./src/index.ts",
+    }
+}
 
 module.exports = {
     mode: process.env.NODE_ENV == "production" ? "production" : "development",
-    devtool: 'inline-source-map',
+    devtool: 'source-map',
     entry: {
         "dragpos": "./src/index.ts",
-        "dragpos.min": "./src/index.ts",
+        ...minifyGroup
     },
     output: {
         filename: "[name].js",

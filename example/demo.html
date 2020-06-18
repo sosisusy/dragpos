@@ -59,7 +59,11 @@
         const dragpos = new DragPos
         dragpos.new({ ele: "#example1" })
         dragpos.new({ ele: "#example2", backgroundColor: "#e0e0e0", fontColor: "blue", group: "test2", controller: ".controller" })
-        dragpos.new({ ele: "#example3", backgroundColor: "#e0e0e0", fontColor: "blue", group: "test2" })
+        dragpos.new({
+            ele: "#example3", backgroundColor: "#e0e0e0", fontColor: "blue", group: "test2", onDrop: (e, option) => {
+                console.log(e, option)
+            },
+        })
         dragpos.new({ ele: "#example4", backgroundColor: "#e0e0e0", fontColor: "blue" })
         dragpos.new({
             ele: "#example5", backgroundColor: "#e0e0e0", fontColor: "blue", onDrop: (e, option) => {
