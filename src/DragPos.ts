@@ -3,10 +3,10 @@ import {
     DRAG_START_CLASS,
     DragPosOptions,
     DRAG_DEFAULT_STYLE_ID,
-    DRAG_KEY_ATTRIBUTE
+    DRAG_KEY_ATTRIBUTE,
+    DefaultOption
 } from "./Config"
 import DragEvent from "./DragEvent"
-
 import CryptoJS from "crypto-js"
 
 let primaryIndex = 1
@@ -21,7 +21,7 @@ class DragPos {
     }
 
     // 추가 생성
-    new(option: DragPosOptions) {
+    new(option: DragPosOptions = {}) {
         this.runDragPos(option)
     }
 
@@ -80,7 +80,8 @@ class DragPos {
     /**
      * 동작
      */
-    runDragPos(option: DragPosOptions = {}) {
+    runDragPos(option: DragPosOptions) {
+        option = { ...DefaultOption, ...option }
         let ele = option.ele as HTMLElement | string
 
         // selector chk
@@ -88,6 +89,10 @@ class DragPos {
             ele = document.querySelector(ele) as HTMLElement
             option.ele = ele
         }
+
+        // element not found
+        // if (!ele) throw new Error("Element not found")
+        if (!ele) return
 
         // 고유키 설정
         option.key = CryptoJS.AES.encrypt(`${primaryIndex++}}`, "sosisusy/dragpos").toString().replace(/\W/g, "").substr(10, 15)
@@ -100,7 +105,7 @@ class DragPos {
         switch (ele.tagName) {
             default:
                 _.map(ele.children, (child) => {
-                    child.addEventListener("mouseover", (e) => DragEvent.handleMouseOver(e, option))
+                    child.setAttribute("draggable", "true")
                     child.addEventListener("dragstart", (e) => DragEvent.handleDragStart(e, option))
                     child.addEventListener("dragover", (e) => DragEvent.handleDragOver(e, option))
                     child.addEventListener("dragend", (e) => DragEvent.handleDragEnd(e, option))

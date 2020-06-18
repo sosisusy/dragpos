@@ -4,7 +4,8 @@ import { DragPosOptionCollection } from "./Config"
 declare global {
     interface Window {
         DragPos: Object,
-        dragposOptionStore: DragPosOptionCollection
+        dragposOptionStore: DragPosOptionCollection,
+        dragposTargetGroup: string,
     }
 }
 

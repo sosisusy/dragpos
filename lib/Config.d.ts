@@ -1,5 +1,8 @@
 /** config */
 export declare const LOOP_LIMIT = 100;
+/** default */
+export declare const DefaultGroup = "dragposPublicGroup";
+export declare const DefaultOption: DragPosOptions;
 /** style */
 export declare const DRAG_DEFAULT_STYLE_ID = "dragpos__default_style";
 /** element class */

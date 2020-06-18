@@ -4,6 +4,16 @@ export const LOOP_LIMIT = 100
 
 
 
+/** default */
+// 기본 그룹명
+export const DefaultGroup = "dragposPublicGroup"
+// 옵션 기본 값
+export const DefaultOption: DragPosOptions = {
+    group: DefaultGroup
+}
+
+
+
 /** style */
 // dragpos를 적용한 element 전체에게 공통으로 적용 될 스타일
 export const DRAG_DEFAULT_STYLE_ID = "dragpos__default_style"

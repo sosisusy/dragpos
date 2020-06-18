@@ -5,13 +5,13 @@ body {
 }
 
 .wrap {
-    display: flex;
-    justify-content: center;
+    /* display: flex; */
+    /* justify-content: center; */
     min-height: 100vh;
 }
 
 .container {
-    width: 600px;
+    /* width: 600px; */
 }
 
 .content {
@@ -20,9 +20,14 @@ body {
 }
 
 .example {
-    display: flex;
+    display: inline-block;
     justify-content: center;
-    margin: 40px 0 20px 0;
+    vertical-align: top;
+    margin: 40px;
+}
+
+pre {
+    display: inline-block;
 }
 
 .list {
