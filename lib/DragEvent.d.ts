@@ -1,5 +1,6 @@
 import { DragPosOptions } from "./Config";
 declare const DragEvent: {
+    handleMouseDown(e: Event, option: DragPosOptions): void;
     /**
      * drag start
      */

@@ -33,11 +33,6 @@ const Utils = {
         })
         return childIndex
     },
-
-    // 해당 그룹 드래그 활성화
-    enableDragGroup() {
-
-    },
 }
 
 export default Utils

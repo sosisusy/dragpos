@@ -84,7 +84,7 @@ class DragPos {
         option = { ...DefaultOption, ...option }
         let ele = option.ele as HTMLElement | string
 
-        // selector chk
+        // ele selector chk
         if (typeof ele === "string") {
             ele = document.querySelector(ele) as HTMLElement
             option.ele = ele
@@ -106,6 +106,13 @@ class DragPos {
             default:
                 _.map(ele.children, (child) => {
                     child.setAttribute("draggable", "true")
+
+                    if (option.controller) {
+                        let controller = document.querySelector(option.controller) as HTMLElement
+                        child.removeAttribute("draggable")
+                        controller.addEventListener("mousedown", (e) => DragEvent.handleMouseDown(e, option))
+                    }
+
                     child.addEventListener("dragstart", (e) => DragEvent.handleDragStart(e, option))
                     child.addEventListener("dragover", (e) => DragEvent.handleDragOver(e, option))
                     child.addEventListener("dragend", (e) => DragEvent.handleDragEnd(e, option))

@@ -5,6 +5,5 @@ declare const Utils: {
      */
     searchParentNode(children: HTMLCollection, ele: HTMLElement, cnt?: number): HTMLElement | boolean;
     searchChildIndex(children: HTMLCollection, ele: HTMLElement): number;
-    enableDragGroup(): void;
 };
 export default Utils;

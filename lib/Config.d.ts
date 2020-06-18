@@ -18,8 +18,8 @@ export interface DragPosOptions {
     backgroundColor?: string;
     fontColor?: string;
     fontSize?: number;
+    controller?: string;
     /** todo */
-    controller?: HTMLElement | string;
     animation?: number;
     fontFamily?: string;
     onDrop?: Function;

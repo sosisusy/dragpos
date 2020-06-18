@@ -40,7 +40,7 @@ export interface DragPosOptions {
     key?: string,
     // drag target container
     ele?: HTMLElement | string,
-    // 
+    // 그룹화
     group?: string,
     // 드래그 시 타겟 배경색
     backgroundColor?: string,
@@ -48,10 +48,10 @@ export interface DragPosOptions {
     fontColor?: string,
     // 드래그 시 타겟 글자 크기
     fontSize?: number,
+    // 리스트 목록을 움직일 대체자
+    controller?: string,
 
     /** todo */
-    // 리스트 목록을 움직일 대체자
-    controller?: HTMLElement | string,
     // animation rate (ms)
     animation?: number,
     // 폰트 설정
