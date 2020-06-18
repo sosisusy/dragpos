@@ -1,6 +1,6 @@
 {
   "name": "dragpos",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "리스트 재배치 라이브러리",
   "main": "./dist/dragpos.js",
   "scripts": {
