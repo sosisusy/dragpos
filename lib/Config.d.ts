@@ -7,7 +7,7 @@ export declare const DefaultOption: DragPosOptions;
 export declare const DRAG_DEFAULT_STYLE_ID = "dragpos__default_style";
 /** element class */
 export declare const DRAG_START_CLASS = "dragpos__drag";
-export declare const DRAG_TARGET_CLASS = "";
+export declare const DRAG_CONTROLLER_CLASS = "dragpos__controller";
 /** dragpos attribute */
 export declare const DRAG_KEY_ATTRIBUTE = "data-dragpos-key";
 /** option */
@@ -18,10 +18,10 @@ export interface DragPosOptions {
     backgroundColor?: string;
     fontColor?: string;
     fontSize?: number;
+    fontFamily?: string;
     controller?: string;
     /** todo */
     animation?: number;
-    fontFamily?: string;
     onDrop?: Function;
     onDragStart?: Function;
 }

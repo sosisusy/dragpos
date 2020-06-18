@@ -32,7 +32,7 @@ pre {
 
 .list {
     display: inline-block;
-    width: 400px;
+    width: 200px;
 }
 
 .list>* {

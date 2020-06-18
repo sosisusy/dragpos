@@ -4,7 +4,8 @@ import {
     DragPosOptions,
     DRAG_DEFAULT_STYLE_ID,
     DRAG_KEY_ATTRIBUTE,
-    DefaultOption
+    DefaultOption,
+    DRAG_CONTROLLER_CLASS
 } from "./Config"
 import DragEvent from "./DragEvent"
 import CryptoJS from "crypto-js"
@@ -49,7 +50,7 @@ class DragPos {
         style = document.createElement("style")
         style.id = DRAG_DEFAULT_STYLE_ID
 
-        style.innerHTML = ``
+        style.innerHTML = `.${DRAG_CONTROLLER_CLASS}{cursor:move;}`
         document.head.appendChild(style)
     }
 
@@ -71,6 +72,7 @@ class DragPos {
             if (option.backgroundColor) styleOption += `background-color:${option.backgroundColor};`
             if (option.fontColor) styleOption += `color:${option.fontColor};`
             if (option.fontSize) styleOption += `font-size:${option.fontSize}px;`
+            if (option.fontFamily) styleOption += `font-family:${option.fontFamily};`
 
             style.innerHTML = `[${DRAG_KEY_ATTRIBUTE}="${option.key}"] .${DRAG_START_CLASS}{${styleOption}}`
             document.head.appendChild(style)
@@ -108,9 +110,11 @@ class DragPos {
                     child.setAttribute("draggable", "true")
 
                     if (option.controller) {
-                        let controller = document.querySelector(option.controller) as HTMLElement
-                        child.removeAttribute("draggable")
+                        let controller = child.querySelector(option.controller) as HTMLElement
+                        controller.classList.add(DRAG_CONTROLLER_CLASS)
                         controller.addEventListener("mousedown", (e) => DragEvent.handleMouseDown(e, option))
+                    } else {
+                        child.classList.add(DRAG_CONTROLLER_CLASS)
                     }
 
                     child.addEventListener("dragstart", (e) => DragEvent.handleDragStart(e, option))

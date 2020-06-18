@@ -6,7 +6,7 @@ const DragEvent = {
 
     // mouse down
     handleMouseDown(e: Event, option: DragPosOptions) {
-        console.log("test")
+        window.dragposEventEnabled = true
     },
 
     /**
@@ -16,6 +16,10 @@ const DragEvent = {
         let container = Utils.searchContainerNode(e.target as HTMLElement) as HTMLElement,
             target = Utils.searchParentNode(container.children, e.target as HTMLElement) as HTMLElement
 
+        // 컨트롤러가 지정된 상태에서 컨트롤러가 아닌 다른 곳을 드래그하여 옮기려 한 경우 이벤트 진행 안함
+        if (option.controller && !window.dragposEventEnabled) return
+
+        window.dragposEventRunning = true
         target.classList.add(DRAG_START_CLASS)
 
         // target group
@@ -28,6 +32,9 @@ const DragEvent = {
     handleDragOver(e: Event, option: DragPosOptions) {
         e.preventDefault()
         e.stopPropagation()
+
+        if (!window.dragposEventRunning) return
+
         const store = window.dragposOptionStore,
             group = store.group
 
@@ -60,8 +67,14 @@ const DragEvent = {
      * drag end
      */
     handleDragEnd(e: Event, option: DragPosOptions) {
+        if (!window.dragposEventRunning) return
+
         let moveTarget = document.querySelector(`.${DRAG_START_CLASS}`) as HTMLElement
         if (moveTarget) moveTarget.classList.remove(DRAG_START_CLASS)
+
+        // reset global variable
+        window.dragposEventRunning = false
+        window.dragposEventEnabled = false
     },
 }
 
