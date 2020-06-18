@@ -1,4 +1,6 @@
 const path = require("path")
+const webpack = require("webpack")
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -7,11 +9,20 @@ module.exports = {
     mode: process.env.NODE_ENV == "production" ? "production" : "development",
     devtool: 'inline-source-map',
     entry: {
-        dragpos: "./src/index.ts",
+        "dragpos": "./src/index.ts",
+        "dragpos.min": "./src/index.ts",
     },
     output: {
         filename: "[name].js",
         path: path.resolve(__dirname, "dist"),
+    },
+    optimization: {
+        minimize: true,
+        minimizer: [
+            new UglifyJsPlugin({
+                include: /\.min\.[tj]s$/
+            }),
+        ],
     },
     module: {
         rules: [
