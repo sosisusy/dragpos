@@ -75,6 +75,8 @@ const DragEvent = {
         // reset global variable
         window.dragposEventRunning = false
         window.dragposEventEnabled = false
+
+        if (option.onDrop) option.onDrop(e, option)
     },
 }
 
