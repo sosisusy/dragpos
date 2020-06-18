@@ -43,7 +43,7 @@ class DragPos {
      * 기본 스타일 적용
      */
     applyDefaultStyle() {
-        let style = document.querySelector(`.${DRAG_DEFAULT_STYLE_ID}`)
+        let style = document.querySelector(`#${DRAG_DEFAULT_STYLE_ID}`)
 
         if (style) return
 
@@ -58,9 +58,8 @@ class DragPos {
      * apply style option
      */
     applyStyleOption(option: DragPosOptions) {
-        let eleId = (option.ele as HTMLElement).id,
-            styleId = `${eleId}_dragpos__style`,
-            style = document.querySelector(styleId)
+        let styleId = `${option.key}_dragpos__style`,
+            style = document.getElementById(styleId)
 
         if (!style) {
             let styleOption = ""
