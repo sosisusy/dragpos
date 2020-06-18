@@ -13,7 +13,9 @@ npm:
 npm i dragpos
 ```
 
+
 샘플 코드:
+
 ```javascript
 import DragPos from "dragpos"
 
@@ -40,15 +42,13 @@ const dragpos = new DragPos(element, )
 ```
 
 옵션:
-```javascript
-{
-    ele: HTMLElement | String       // 타겟 지정
-    group: String,                  // 드래그 그룹 지정
-    backgroundColor: String,        // 드래그 이벤트 발생 시 타겟 배경색 변경
-    fontColor: String,              // 드래그 이벤트 발생 시 타겟 글자 색상
-    fontSize: Number,               // 드래그 이벤트 발생 시 타겟 글자 크기
-    fontFamily: String,             // 드래그 이벤트 발생 시 폰트 설정
-    controller: String,             // 리스트 목록을 움직일 대체자 (셀렉터로 지정)
-    onDrop: Function,               // 위치변경 완료 후 이벤트  params(event, option)
-}
-```
+| Attribute | Type |     |
+|:----|:----|:----|
+| ele | `HTMLElement` `String` | 리스트 컨테이너 지정 |
+| group | `String` | 드래그 그룹 지정 |
+| backgroundColor | `String` | 드래그 이벤트 발생 시 타겟 배경색 변경 |
+| fontColor | `String` | 드래그 이벤트 발생 시 타겟 글자 색상 |
+| fontSize |`Number` | 드래그 이벤트 발생 시 타겟 글자 크기 |
+| fontFamily | `String` | 드래그 이벤트 발생 시 폰트 설정 |
+| controller | `String` | 리스트 목록을 움직일 대체자 (셀렉터로 지정) |
+| onDrop | `Function` | 위치변경 완료 후 이벤트  params(event, option) |
