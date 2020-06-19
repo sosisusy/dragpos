@@ -37,7 +37,9 @@
     "typescript": "^3.9.5",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "https-proxy-agent": ">=2.2.3",
+    "http-proxy-agent": ">=2.1.0"
   },
   "dependencies": {
     "@types/crypto-js": "^3.1.47",
