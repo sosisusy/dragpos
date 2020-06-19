@@ -10222,7 +10222,7 @@ function decrypt (data, password) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DRAG_KEY_ATTRIBUTE = exports.DRAG_CONTROLLER_CLASS = exports.DRAG_START_CLASS = exports.DRAG_DEFAULT_STYLE_ID = exports.DefaultOption = exports.DefaultGroup = exports.LOOP_LIMIT = void 0;
+exports.DRAG_KEY_ATTRIBUTE = exports.DRAG_HANDLER_CLASS = exports.DRAG_START_CLASS = exports.DRAG_DEFAULT_STYLE_ID = exports.DefaultOption = exports.DefaultGroup = exports.LOOP_LIMIT = void 0;
 /** config */
 // 묵시적 반복문 최대 반복 수
 exports.LOOP_LIMIT = 100;
@@ -10239,8 +10239,8 @@ exports.DRAG_DEFAULT_STYLE_ID = "dragpos__default_style";
 /** element class */
 // 드래그 이벤트 발생 시 적용될 클래스
 exports.DRAG_START_CLASS = "dragpos__drag";
-// 드래그 컨트롤러 클래스
-exports.DRAG_CONTROLLER_CLASS = "dragpos__controller";
+// 드래그 핸들러 클래스
+exports.DRAG_HANDLER_CLASS = "dragpos__handler";
 /** dragpos attribute */
 // 고유키가 담길 element 속성
 exports.DRAG_KEY_ATTRIBUTE = "data-dragpos-key";
@@ -34972,19 +34972,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var DragPos_1 = __importDefault(__webpack_require__(91));
-// declare global {
-//     interface Window {
-//         DragPos: Object,
-//         // 드래그옵션 저장
-//         dragposOptionStore: DragPosOptionCollection,
-//         // 현재 드래그 되고 있는 노드의 그룹 저장
-//         dragposTargetGroup: string,
-//         // 드래그 이벤트 진행 여부
-//         dragposEventRunning: boolean,
-//         // 드래그 이벤트 활성 여부
-//         dragposEventEnabled: boolean,
-//     }
-// }
 window.DragPos = DragPos_1.default;
 window.dragposOptionStore = {
     mapping: {},
@@ -35055,7 +35042,7 @@ var DragPos = /** @class */ (function () {
             return;
         style = document.createElement("style");
         style.id = Config_1.DRAG_DEFAULT_STYLE_ID;
-        style.innerHTML = "." + Config_1.DRAG_CONTROLLER_CLASS + "{cursor:move;}";
+        style.innerHTML = "." + Config_1.DRAG_HANDLER_CLASS + "{cursor:move;}";
         document.head.appendChild(style);
     };
     /**
@@ -35105,13 +35092,13 @@ var DragPos = /** @class */ (function () {
             default:
                 lodash_1.default.map(ele.children, function (child) {
                     child.setAttribute("draggable", "true");
-                    if (option.controller) {
-                        var controller = child.querySelector(option.controller);
-                        controller.classList.add(Config_1.DRAG_CONTROLLER_CLASS);
-                        controller.addEventListener("mousedown", function (e) { return DragEvent_1.default.handleMouseDown(e, option); });
+                    if (option.handler) {
+                        var handler = child.querySelector(option.handler);
+                        handler.classList.add(Config_1.DRAG_HANDLER_CLASS);
+                        handler.addEventListener("mousedown", function (e) { return DragEvent_1.default.handleMouseDown(e, option); });
                     }
                     else {
-                        child.classList.add(Config_1.DRAG_CONTROLLER_CLASS);
+                        child.classList.add(Config_1.DRAG_HANDLER_CLASS);
                     }
                     child.addEventListener("dragstart", function (e) { return DragEvent_1.default.handleDragStart(e, option); });
                     child.addEventListener("dragover", function (e) { return DragEvent_1.default.handleDragOver(e, option); });
@@ -35149,12 +35136,15 @@ var DragEvent = {
         var _a;
         var container = Utils_1.default.searchContainerNode(e.target), target = Utils_1.default.searchParentNode(container.children, e.target);
         // 컨트롤러가 지정된 상태에서 컨트롤러가 아닌 다른 곳을 드래그하여 옮기려 한 경우 이벤트 진행 안함
-        if (option.controller && !window.dragposEventEnabled)
+        if (option.handler && !window.dragposEventEnabled)
             return;
         window.dragposEventRunning = true;
         target.classList.add(Config_1.DRAG_START_CLASS);
         // target group
         window.dragposTargetGroup = (_a = option.group) !== null && _a !== void 0 ? _a : "";
+        // Custom Listener
+        if (option.onDragStart)
+            option.onDragStart(e, option);
     },
     /**
      * drag over
@@ -35182,7 +35172,13 @@ var DragEvent = {
             else {
                 container.insertBefore(moveTarget, target);
             }
+            // Custom Listener
+            if (option.onChange)
+                option.onChange(e, option);
         }
+        // Custom Listener
+        if (option.onDragOver)
+            option.onDragOver(e, option);
     },
     /**
      * drag end
@@ -35196,6 +35192,7 @@ var DragEvent = {
         // reset global variable
         window.dragposEventRunning = false;
         window.dragposEventEnabled = false;
+        // Custom Listener
         if (option.onDragEnd)
             option.onDragEnd(e, option);
     },
