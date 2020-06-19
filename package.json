@@ -1,6 +1,6 @@
 {
   "name": "dragpos",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "리스트 재배치 라이브러리",
   "main": "./src/index.ts",
   "types": "./lib/index.d.ts",

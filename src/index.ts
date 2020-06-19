@@ -15,6 +15,7 @@ declare global {
     }
 }
 
+
 window.DragPos = DragPos;
 window.dragposOptionStore = {
     mapping: {},
