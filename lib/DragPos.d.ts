@@ -2,15 +2,15 @@ import { DragPosOptions } from "./Config";
 declare class DragPos {
     constructor(ele?: HTMLElement | string, option?: DragPosOptions);
     new(option?: DragPosOptions): void;
-    appendStore(option: DragPosOptions): void;
+    private appendStore;
     /**
      * 기본 스타일 적용
      */
-    applyDefaultStyle(): void;
+    private applyDefaultStyle;
     /**
      * apply style option
      */
-    applyStyleOption(option: DragPosOptions): void;
+    private applyStyleOption;
     /**
      * 동작
      */

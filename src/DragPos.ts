@@ -27,7 +27,7 @@ class DragPos {
     }
 
     // 옵션 정보 추가
-    appendStore(option: DragPosOptions) {
+    private appendStore(option: DragPosOptions) {
         let store = window.dragposOptionStore,
             primaryKey = option.key as string
 
@@ -42,7 +42,7 @@ class DragPos {
     /**
      * 기본 스타일 적용
      */
-    applyDefaultStyle() {
+    private applyDefaultStyle() {
         let style = document.querySelector(`#${DRAG_DEFAULT_STYLE_ID}`)
 
         if (style) return
@@ -57,7 +57,7 @@ class DragPos {
     /**
      * apply style option
      */
-    applyStyleOption(option: DragPosOptions) {
+    private applyStyleOption(option: DragPosOptions) {
         let styleId = `${option.key}_dragpos__style`,
             style = document.getElementById(styleId)
 
@@ -92,8 +92,7 @@ class DragPos {
         }
 
         // element not found
-        // if (!ele) throw new Error("Element not found")
-        if (!ele) return
+        if (!ele) throw new Error("Element not found")
 
         // 고유키 설정
         option.key = CryptoJS.AES.encrypt(`${primaryIndex++}}`, "sosisusy/dragpos").toString().replace(/\W/g, "").substr(10, 15)
@@ -106,7 +105,7 @@ class DragPos {
         switch (ele.tagName) {
             default:
                 _.map(ele.children, (child) => {
-                    child.setAttribute("draggable", "true")
+                    child.removeAttribute("draggable")
 
                     if (option.handler) {
                         let handler = child.querySelector(option.handler) as HTMLElement
@@ -114,6 +113,7 @@ class DragPos {
                         handler.addEventListener("mousedown", (e) => DragEvent.handleMouseDown(e, option))
                     } else {
                         child.classList.add(DRAG_HANDLER_CLASS)
+                        child.addEventListener("mousedown", (e) => DragEvent.handleMouseDown(e, option))
                     }
 
                     child.addEventListener("dragstart", (e) => DragEvent.handleDragStart(e, option))

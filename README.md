@@ -1,8 +1,9 @@
-# Dragpos ![](https://img.shields.io/npm/l/dragpos) ![](https://img.shields.io/npm/v/dragpos) ![](https://img.shields.io/github/package-json/v/sosisusy/dragpos) ![](https://img.shields.io/bundlephobia/min/dragpos) ![](https://img.shields.io/npm/dm/dragpos)
+![](https://img.shields.io/npm/l/dragpos) ![](https://img.shields.io/npm/v/dragpos) ![](https://img.shields.io/github/package-json/v/sosisusy/dragpos) ![](https://img.shields.io/bundlephobia/min/dragpos) ![](https://img.shields.io/npm/dm/dragpos)
+
+# Dragpos
 
 Dragpos is typescript library.
 Helps to rearrange the list.
-
 
 #### Demo
 <https://sosisusy.github.io/dragpos/>
@@ -60,9 +61,10 @@ dragpos.new({
 | fontColor | `String` | Specify font color |
 | fontSize |`Number` | Specify font size |
 | fontFamily | `String` | Specify font |
-
+   
+   
 |Listener|Params|   |
-|---|---|---|
+|:---|:---|:---|
 | onDragStart | `Event`, `Option` | Occurred when the dragging starts |
 | onDragOver | `Event`, `Option` | Occurred when the dragging over |
 | onDragEnd | `Event`, `Option` | Occurred when the dragging ends |

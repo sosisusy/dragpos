@@ -4,9 +4,6 @@ declare global {
     interface Window {
         DragPos: Object;
         dragposOptionStore: DragPosOptionCollection;
-        dragposTargetGroup: string;
-        dragposEventRunning: boolean;
-        dragposEventEnabled: boolean;
     }
 }
 export default DragPos;

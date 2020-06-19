@@ -31,6 +31,8 @@ export const DRAG_HANDLER_CLASS = "dragpos__handler"
 /** dragpos attribute */
 // 고유키가 담길 element 속성
 export const DRAG_KEY_ATTRIBUTE = "data-dragpos-key"
+// 애니메이션 진행 상태
+export const DRAG_ANIMATION_STATUS = "data-animation-status"
 
 
 

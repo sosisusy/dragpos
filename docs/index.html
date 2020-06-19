@@ -23,11 +23,11 @@
                 </div>
                 <div class="example">
                     <div class="list" id="example2">
-                        <div><span class="controller">▒</span>list 1</div>
-                        <div><span class="controller">▒</span>list 2</div>
-                        <div><span class="controller">▒</span>list 3</div>
-                        <div><span class="controller">▒</span>list 4</div>
-                        <div><span class="controller">▒</span>list 5</div>
+                        <div><span class="handler">:::</span> list 1</div>
+                        <div><span class="handler">:::</span> list 2</div>
+                        <div><span class="handler">:::</span> list 3</div>
+                        <div><span class="handler">:::</span> list 4</div>
+                        <div><span class="handler">:::</span> list 5</div>
                     </div>
                 </div>
                 <div class="example">
@@ -40,6 +40,7 @@
                     </div>
                 </div>
                 <div class="example">
+
                     <div class="list" id="example4">
                         <div>list 1</div>
                         <div>list 2</div>
@@ -54,21 +55,47 @@
             </div>
         </div>
     </div>
-    <script src="./dragpos.min.js"></script>
+    <!-- <script src="./dragpos.min.js"></script> -->
+    <script src="../dist/dragpos.js"></script>
     <script>
         const dragpos = new DragPos
-        dragpos.new({ ele: "#example1" })
-        dragpos.new({ ele: "#example2", backgroundColor: "#e0e0e0", fontColor: "blue", group: "test2", controller: ".controller" })
         dragpos.new({
-            ele: "#example3", backgroundColor: "#e0e0e0", fontColor: "blue", group: "test2", onDragEnd: (e, option) => {
-                console.log(e, option)
-            },
+            ele: "#example1"
         })
-        dragpos.new({ ele: "#example4", backgroundColor: "#e0e0e0", fontColor: "blue" })
         dragpos.new({
-            ele: "#example5", backgroundColor: "#e0e0e0", fontColor: "blue", onDragEnd: (e, option) => {
-                alert("End")
+            ele: "#example2",
+            backgroundColor: "#e0e0e0",
+            fontColor: "blue",
+            group: "test2",
+            handler: ".handler"
+        })
+        dragpos.new({
+            ele: "#example3",
+            backgroundColor: "#e0e0e0",
+            fontColor: "blue",
+            group: "test2",
+            onDragStart: (e, option) => {
+                console.log("onDragStart")
+            },
+            onDragOver: (e, option) => {
+                console.log("onDragOver")
+            },
+            onDragEnd: (e, option) => {
+                console.log("onDragEnd")
+            },
+            onChange: (e, option) => {
+                console.log("onChange")
             }
+        })
+        dragpos.new({
+            ele: "#example4",
+            backgroundColor: "#e0e0e0",
+            fontColor: "blue",
+        })
+        dragpos.new({
+            ele: "#example5",
+            backgroundColor: "#e0e0e0",
+            fontColor: "blue",
         })
     </script>
 </body>

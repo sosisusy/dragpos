@@ -1,12 +1,19 @@
 import Utils from "./Utils"
-import { DRAG_START_CLASS, DragPosOptions } from "./Config"
+import { DRAG_START_CLASS, DragPosOptions, DRAG_ANIMATION_STATUS } from "./Config"
+import Animation from "./Animation"
 import _ from "lodash"
+
+let dragposTargetGroup: string = ""
 
 const DragEvent = {
 
     // mouse down
     handleMouseDown(e: Event, option: DragPosOptions) {
-        window.dragposEventEnabled = true
+        const container = Utils.searchContainerNode(e.target as HTMLElement) as HTMLElement,
+            target = Utils.searchParentNode(container.children, e.target as HTMLElement) as HTMLElement
+
+        // 드래그 허용
+        target.setAttribute("draggable", "true")
     },
 
     /**
@@ -16,14 +23,11 @@ const DragEvent = {
         let container = Utils.searchContainerNode(e.target as HTMLElement) as HTMLElement,
             target = Utils.searchParentNode(container.children, e.target as HTMLElement) as HTMLElement
 
-        // 컨트롤러가 지정된 상태에서 컨트롤러가 아닌 다른 곳을 드래그하여 옮기려 한 경우 이벤트 진행 안함
-        if (option.handler && !window.dragposEventEnabled) return
-
-        window.dragposEventRunning = true
+        // 드래그 클래스 설정
         target.classList.add(DRAG_START_CLASS)
 
         // target group
-        window.dragposTargetGroup = option.group ?? ""
+        dragposTargetGroup = option.group ?? ""
 
         // Custom Listener
         if (option.onDragStart) option.onDragStart(e, option)
@@ -35,8 +39,6 @@ const DragEvent = {
     handleDragOver(e: Event, option: DragPosOptions) {
         e.preventDefault()
         e.stopPropagation()
-
-        if (!window.dragposEventRunning) return
 
         const store = window.dragposOptionStore,
             group = store.group
@@ -55,7 +57,10 @@ const DragEvent = {
                 moveTargetIndex = Utils.searchChildIndex(containerChildren, moveTarget)
 
             // 이동 노드의 그룹과 오버된 노드의 그룹이 다른 경우 무시
-            if (window.dragposTargetGroup && group[window.dragposTargetGroup].indexOf(option.key as string) === -1) return
+            if (dragposTargetGroup && group[dragposTargetGroup].indexOf(option.key as string) === -1) return
+            if (target.getAttribute(DRAG_ANIMATION_STATUS) || moveTarget.getAttribute(DRAG_ANIMATION_STATUS)) return
+
+
 
             // 인덱스 위치 확인 후 노드 이동
             if (targetIndex > moveTargetIndex) {
@@ -63,6 +68,10 @@ const DragEvent = {
             } else {
                 container.insertBefore(moveTarget, target)
             }
+
+            // animation
+            Animation.animate(moveTarget, target, 150)
+            Animation.animate(target, moveTarget, 150)
 
             // Custom Listener
             if (option.onChange) option.onChange(e, option)
@@ -76,14 +85,13 @@ const DragEvent = {
      * drag end
      */
     handleDragEnd(e: Event, option: DragPosOptions) {
-        if (!window.dragposEventRunning) return
-
         let moveTarget = document.querySelector(`.${DRAG_START_CLASS}`) as HTMLElement
+
+        // 드래그 클래스 삭제
         if (moveTarget) moveTarget.classList.remove(DRAG_START_CLASS)
 
-        // reset global variable
-        window.dragposEventRunning = false
-        window.dragposEventEnabled = false
+        // 드래그 불허
+        moveTarget.removeAttribute("draggable")
 
         // Custom Listener
         if (option.onDragEnd) option.onDragEnd(e, option)

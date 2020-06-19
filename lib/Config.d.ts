@@ -10,6 +10,7 @@ export declare const DRAG_START_CLASS = "dragpos__drag";
 export declare const DRAG_HANDLER_CLASS = "dragpos__handler";
 /** dragpos attribute */
 export declare const DRAG_KEY_ATTRIBUTE = "data-dragpos-key";
+export declare const DRAG_ANIMATION_STATUS = "data-animation-status";
 /** option */
 export interface DragPosOptions {
     key?: string;
