@@ -17,13 +17,16 @@ const DragEvent = {
             target = Utils.searchParentNode(container.children, e.target as HTMLElement) as HTMLElement
 
         // 컨트롤러가 지정된 상태에서 컨트롤러가 아닌 다른 곳을 드래그하여 옮기려 한 경우 이벤트 진행 안함
-        if (option.controller && !window.dragposEventEnabled) return
+        if (option.handler && !window.dragposEventEnabled) return
 
         window.dragposEventRunning = true
         target.classList.add(DRAG_START_CLASS)
 
         // target group
         window.dragposTargetGroup = option.group ?? ""
+
+        // Custom Listener
+        if (option.onDragStart) option.onDragStart(e, option)
     },
 
     /**
@@ -60,7 +63,13 @@ const DragEvent = {
             } else {
                 container.insertBefore(moveTarget, target)
             }
+
+            // Custom Listener
+            if (option.onChange) option.onChange(e, option)
         }
+
+        // Custom Listener
+        if (option.onDragOver) option.onDragOver(e, option)
     },
 
     /**
@@ -76,6 +85,7 @@ const DragEvent = {
         window.dragposEventRunning = false
         window.dragposEventEnabled = false
 
+        // Custom Listener
         if (option.onDragEnd) option.onDragEnd(e, option)
     },
 }

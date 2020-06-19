@@ -23,8 +23,8 @@ export const DRAG_DEFAULT_STYLE_ID = "dragpos__default_style"
 /** element class */
 // 드래그 이벤트 발생 시 적용될 클래스
 export const DRAG_START_CLASS = "dragpos__drag"
-// 드래그 컨트롤러 클래스
-export const DRAG_CONTROLLER_CLASS = "dragpos__controller"
+// 드래그 핸들러 클래스
+export const DRAG_HANDLER_CLASS = "dragpos__handler"
 
 
 
@@ -51,15 +51,17 @@ export interface DragPosOptions {
     // 폰트 설정
     fontFamily?: string,
     // 리스트 목록을 움직일 대체자 (셀렉터로 지정)
-    controller?: string,
-    // 위치변경 완료 후 이벤트  params(event, option)
+    handler?: string,
+
+    // 이벤트 리스너  params(event, option)
+    onDragStart?: Function,
+    onDragOver?: Function,
     onDragEnd?: Function,
+    onChange?: Function,
 
     /** todo */
     // animation rate (ms)
     animation?: number,
-    // 이벤트 리스너
-    onDragStart?: Function,
     /** todo */
 }
 
