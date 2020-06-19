@@ -35183,8 +35183,8 @@ var DragEvent = {
         // reset global variable
         window.dragposEventRunning = false;
         window.dragposEventEnabled = false;
-        if (option.onDrop)
-            option.onDrop(e, option);
+        if (option.onDragEnd)
+            option.onDragEnd(e, option);
     },
 };
 exports.default = DragEvent;

@@ -20,7 +20,7 @@ export interface DragPosOptions {
     fontSize?: number;
     fontFamily?: string;
     controller?: string;
-    onDrop?: Function;
+    onDragEnd?: Function;
     /** todo */
     animation?: number;
     onDragStart?: Function;

@@ -2,7 +2,7 @@
 .babelrc
 
 docs
-lib
 
 webpack.config.js
 _config.yml
+tsconfig.json

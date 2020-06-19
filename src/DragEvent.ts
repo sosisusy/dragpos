@@ -76,7 +76,7 @@ const DragEvent = {
         window.dragposEventRunning = false
         window.dragposEventEnabled = false
 
-        if (option.onDrop) option.onDrop(e, option)
+        if (option.onDragEnd) option.onDragEnd(e, option)
     },
 }
 

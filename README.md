@@ -1,6 +1,6 @@
 # Dragpos ![](https://img.shields.io/npm/l/dragpos) ![](https://img.shields.io/npm/v/dragpos) ![](https://img.shields.io/github/package-json/v/sosisusy/dragpos) ![](https://img.shields.io/bundlephobia/min/dragpos) ![](https://img.shields.io/npm/dm/dragpos)
 
-Dragpos는 자바스크립트 라이브러리입니다.
+Dragpos는 타입스크립트 라이브러리입니다.
 Element 리스트 순서를 재정렬 할 수 있게 도와줍니다.
 
 
@@ -31,14 +31,12 @@ dragpos.new({
     ele: e2,
     controller: ".controller",
     backgroundColor: "#eee",
-    onDrop: (e, option) => {      // 이벤트 종료 후 리스너
+    onDragEnd: (e, option) => {      // 이벤트 종료 후 리스너
         fetch("http://example.com/")
         .then(res => res.text())
         .then(res => console.log(res))
     }
 })
-
-const dragpos = new DragPos(element, )
 ```
 
 옵션:
@@ -51,4 +49,4 @@ const dragpos = new DragPos(element, )
 | fontSize |`Number` | 드래그 이벤트 발생 시 타겟 글자 크기 |
 | fontFamily | `String` | 드래그 이벤트 발생 시 폰트 설정 |
 | controller | `String` | 리스트 목록을 움직일 대체자 (셀렉터로 지정) |
-| onDrop | `Function` | 위치변경 완료 후 이벤트  params(event, option) |
+| onDragEnd | `Function` | 위치변경 완료 후 이벤트  params(event, option) |

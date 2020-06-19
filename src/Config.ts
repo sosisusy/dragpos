@@ -53,7 +53,7 @@ export interface DragPosOptions {
     // 리스트 목록을 움직일 대체자 (셀렉터로 지정)
     controller?: string,
     // 위치변경 완료 후 이벤트  params(event, option)
-    onDrop?: Function,
+    onDragEnd?: Function,
 
     /** todo */
     // animation rate (ms)
