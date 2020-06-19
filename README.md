@@ -1,6 +1,6 @@
 # Dragpos ![](https://img.shields.io/npm/l/dragpos) ![](https://img.shields.io/npm/v/dragpos) ![](https://img.shields.io/github/package-json/v/sosisusy/dragpos) ![](https://img.shields.io/bundlephobia/min/dragpos) ![](https://img.shields.io/npm/dm/dragpos)
 
-Dragpos는 타입스크립트 라이브러리입니다.
+Dragpos는 타입스크립트 라이브러리입니다.   
 Element 리스트 순서를 재정렬 할 수 있게 도와줍니다.
 
 
@@ -8,15 +8,27 @@ Element 리스트 순서를 재정렬 할 수 있게 도와줍니다.
 <https://sosisusy.github.io/dragpos/>
 
 ### Getting Started
-npm:
-```
+
+#### install
+```shell
 npm i dragpos
 ```
 
-
-샘플 코드:
-
+#### import
+```html
+<script src="dragpos/dist/dragpos.js"></script>
+<script>
+    const dragpos = new DragPos(element, option)
+</script>
+```
 ```javascript
+import DragPos from "dragpos"
+const dragpos = new DragPos(element, option)
+```
+
+#### example
+
+```typescript
 import DragPos from "dragpos"
 
 // example 클래스를 가지는 노드에 정렬 헬퍼 등록
@@ -39,7 +51,7 @@ dragpos.new({
 })
 ```
 
-옵션:
+#### option
 | Attribute | Type |     |
 |:----|:----|:----|
 | ele | `HTMLElement` `String` | 리스트 컨테이너 지정 |
