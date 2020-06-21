@@ -1,6 +1,7 @@
 import { DRAG_ANIMATION_STATUS } from "./Config"
 
-// let animation = []
+
+let adump = [] as Array<any>
 
 const animation = {
     // 애니메이션 등록
@@ -15,17 +16,17 @@ const animation = {
             moveX = toRect.left - fromRect.left,
             moveY = toRect.top - fromRect.top
 
-        console.log(moveX, moveY)
         from.style["transition"] = `transform ${rate}ms`
-        from.style["transform"] = `perspective(500px) translate3d(${moveX}px, ${moveY}px, 0px)`
+        from.style["transform"] = `translate3d(${moveX}px, ${moveY}px, 0px)`
         from.setAttribute(DRAG_ANIMATION_STATUS, "true")
 
-
-        setTimeout(() => {
-            from.removeAttribute(DRAG_ANIMATION_STATUS)
-            from.style["transition"] = ""
-            from.style["transform"] = ""
-        }, rate)
+        adump.push(
+            setTimeout(() => {
+                from.removeAttribute(DRAG_ANIMATION_STATUS)
+                from.style["transition"] = ""
+                from.style["transform"] = ""
+            }, rate)
+        )
     },
 }
 

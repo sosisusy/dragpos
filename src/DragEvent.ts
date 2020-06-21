@@ -46,7 +46,8 @@ const DragEvent = {
         let container = Utils.searchContainerNode(e.target as HTMLElement) as HTMLElement,
             containerChildren = container.children,
             target = Utils.searchParentNode(containerChildren, e.target as HTMLElement) as HTMLElement,
-            moveTarget = document.querySelector(`.${DRAG_START_CLASS}`) as HTMLElement
+            moveTarget = document.querySelector(`.${DRAG_START_CLASS}`) as HTMLElement,
+            moveTargetContainer = Utils.searchContainerNode(moveTarget) as HTMLElement
 
         // 노드찾기 실패 시 이벤트 무시
         if (!target) return
@@ -63,15 +64,24 @@ const DragEvent = {
 
 
             // 인덱스 위치 확인 후 노드 이동
+
             if (targetIndex > moveTargetIndex) {
                 container.insertBefore(moveTarget, containerChildren[targetIndex + 1])
             } else {
                 container.insertBefore(moveTarget, target)
             }
 
+
             // animation
-            Animation.animate(moveTarget, target, 150)
-            Animation.animate(target, moveTarget, 150)
+            // let animationRate = option.animation
+            // if (animationRate) {
+            //     Animation.animate(moveTarget, target, animationRate)
+            //     if (container === moveTargetContainer) {
+            //         Animation.animate(target, moveTarget, animationRate)
+            //     } else {
+            //         Animation.animate(target, containerChildren[targetIndex + 1] as HTMLElement, animationRate)
+            //     }
+            // }
 
             // Custom Listener
             if (option.onChange) option.onChange(e, option)

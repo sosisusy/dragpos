@@ -54,6 +54,8 @@ export interface DragPosOptions {
     fontFamily?: string,
     // 리스트 목록을 움직일 대체자 (셀렉터로 지정)
     handler?: string,
+    // animation rate (ms)
+    animation?: number,
 
     // 이벤트 리스너  params(event, option)
     onDragStart?: Function,
@@ -62,8 +64,6 @@ export interface DragPosOptions {
     onChange?: Function,
 
     /** todo */
-    // animation rate (ms)
-    animation?: number,
     /** todo */
 }
 

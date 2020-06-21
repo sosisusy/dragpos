@@ -21785,10 +21785,10 @@ utils.intFromLE = intFromLE;
 /*!********************************************!*\
   !*** ./node_modules/elliptic/package.json ***!
   \********************************************/
-/*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, bugs, bundleDependencies, dependencies, deprecated, description, devDependencies, files, homepage, keywords, license, main, name, repository, scripts, version, default */
+/*! exports provided: _args, _development, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, author, bugs, dependencies, description, devDependencies, files, homepage, keywords, license, main, name, repository, scripts, version, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"_from\":\"elliptic@^6.5.2\",\"_id\":\"elliptic@6.5.2\",\"_inBundle\":false,\"_integrity\":\"sha512-f4x70okzZbIQl/NSRLkI/+tteV/9WqL98zx+SQ69KbXxmVrmjwsNUPn/gYJJ0sHvEak24cZgHIPegRePAtA/xw==\",\"_location\":\"/elliptic\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"range\",\"registry\":true,\"raw\":\"elliptic@^6.5.2\",\"name\":\"elliptic\",\"escapedName\":\"elliptic\",\"rawSpec\":\"^6.5.2\",\"saveSpec\":null,\"fetchSpec\":\"^6.5.2\"},\"_requiredBy\":[\"/browserify-sign\",\"/create-ecdh\"],\"_resolved\":\"https://registry.npmjs.org/elliptic/-/elliptic-6.5.2.tgz\",\"_shasum\":\"05c5678d7173c049d8ca433552224a495d0e3762\",\"_spec\":\"elliptic@^6.5.2\",\"_where\":\"C:\\\\Users\\\\user\\\\Desktop\\\\repos\\\\node_modules\\\\browserify-sign\",\"author\":{\"name\":\"Fedor Indutny\",\"email\":\"fedor@indutny.com\"},\"bugs\":{\"url\":\"https://github.com/indutny/elliptic/issues\"},\"bundleDependencies\":false,\"dependencies\":{\"bn.js\":\"^4.4.0\",\"brorand\":\"^1.0.1\",\"hash.js\":\"^1.0.0\",\"hmac-drbg\":\"^1.0.0\",\"inherits\":\"^2.0.1\",\"minimalistic-assert\":\"^1.0.0\",\"minimalistic-crypto-utils\":\"^1.0.0\"},\"deprecated\":false,\"description\":\"EC cryptography\",\"devDependencies\":{\"brfs\":\"^1.4.3\",\"coveralls\":\"^3.0.8\",\"grunt\":\"^1.0.4\",\"grunt-browserify\":\"^5.0.0\",\"grunt-cli\":\"^1.2.0\",\"grunt-contrib-connect\":\"^1.0.0\",\"grunt-contrib-copy\":\"^1.0.0\",\"grunt-contrib-uglify\":\"^1.0.1\",\"grunt-mocha-istanbul\":\"^3.0.1\",\"grunt-saucelabs\":\"^9.0.1\",\"istanbul\":\"^0.4.2\",\"jscs\":\"^3.0.7\",\"jshint\":\"^2.10.3\",\"mocha\":\"^6.2.2\"},\"files\":[\"lib\"],\"homepage\":\"https://github.com/indutny/elliptic\",\"keywords\":[\"EC\",\"Elliptic\",\"curve\",\"Cryptography\"],\"license\":\"MIT\",\"main\":\"lib/elliptic.js\",\"name\":\"elliptic\",\"repository\":{\"type\":\"git\",\"url\":\"git+ssh://git@github.com/indutny/elliptic.git\"},\"scripts\":{\"jscs\":\"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js\",\"jshint\":\"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js\",\"lint\":\"npm run jscs && npm run jshint\",\"test\":\"npm run lint && npm run unit\",\"unit\":\"istanbul test _mocha --reporter=spec test/index.js\",\"version\":\"grunt dist && git add dist/\"},\"version\":\"6.5.2\"}");
+module.exports = JSON.parse("{\"_args\":[[\"elliptic@6.5.2\",\"C:\\\\Users\\\\TaeWoo\\\\Desktop\\\\project\\\\dragpos\"]],\"_development\":true,\"_from\":\"elliptic@6.5.2\",\"_id\":\"elliptic@6.5.2\",\"_inBundle\":false,\"_integrity\":\"sha512-f4x70okzZbIQl/NSRLkI/+tteV/9WqL98zx+SQ69KbXxmVrmjwsNUPn/gYJJ0sHvEak24cZgHIPegRePAtA/xw==\",\"_location\":\"/elliptic\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"elliptic@6.5.2\",\"name\":\"elliptic\",\"escapedName\":\"elliptic\",\"rawSpec\":\"6.5.2\",\"saveSpec\":null,\"fetchSpec\":\"6.5.2\"},\"_requiredBy\":[\"/browserify-sign\",\"/create-ecdh\"],\"_resolved\":\"https://registry.npmjs.org/elliptic/-/elliptic-6.5.2.tgz\",\"_spec\":\"6.5.2\",\"_where\":\"C:\\\\Users\\\\TaeWoo\\\\Desktop\\\\project\\\\dragpos\",\"author\":{\"name\":\"Fedor Indutny\",\"email\":\"fedor@indutny.com\"},\"bugs\":{\"url\":\"https://github.com/indutny/elliptic/issues\"},\"dependencies\":{\"bn.js\":\"^4.4.0\",\"brorand\":\"^1.0.1\",\"hash.js\":\"^1.0.0\",\"hmac-drbg\":\"^1.0.0\",\"inherits\":\"^2.0.1\",\"minimalistic-assert\":\"^1.0.0\",\"minimalistic-crypto-utils\":\"^1.0.0\"},\"description\":\"EC cryptography\",\"devDependencies\":{\"brfs\":\"^1.4.3\",\"coveralls\":\"^3.0.8\",\"grunt\":\"^1.0.4\",\"grunt-browserify\":\"^5.0.0\",\"grunt-cli\":\"^1.2.0\",\"grunt-contrib-connect\":\"^1.0.0\",\"grunt-contrib-copy\":\"^1.0.0\",\"grunt-contrib-uglify\":\"^1.0.1\",\"grunt-mocha-istanbul\":\"^3.0.1\",\"grunt-saucelabs\":\"^9.0.1\",\"istanbul\":\"^0.4.2\",\"jscs\":\"^3.0.7\",\"jshint\":\"^2.10.3\",\"mocha\":\"^6.2.2\"},\"files\":[\"lib\"],\"homepage\":\"https://github.com/indutny/elliptic\",\"keywords\":[\"EC\",\"Elliptic\",\"curve\",\"Cryptography\"],\"license\":\"MIT\",\"main\":\"lib/elliptic.js\",\"name\":\"elliptic\",\"repository\":{\"type\":\"git\",\"url\":\"git+ssh://git@github.com/indutny/elliptic.git\"},\"scripts\":{\"jscs\":\"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js\",\"jshint\":\"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js\",\"lint\":\"npm run jscs && npm run jshint\",\"test\":\"npm run lint && npm run unit\",\"unit\":\"istanbul test _mocha --reporter=spec test/index.js\",\"version\":\"grunt dist && git add dist/\"},\"version\":\"6.5.2\"}");
 
 /***/ }),
 
@@ -47561,41 +47561,6 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./src/Animation.ts":
-/*!**************************!*\
-  !*** ./src/Animation.ts ***!
-  \**************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var Config_1 = __webpack_require__(/*! ./Config */ "./src/Config.ts");
-// let animation = []
-var animation = {
-    // 애니메이션 등록
-    push: function () {
-    },
-    // animation
-    animate: function (from, to, rate) {
-        var fromRect = from.getBoundingClientRect(), toRect = to.getBoundingClientRect(), moveX = toRect.left - fromRect.left, moveY = toRect.top - fromRect.top;
-        console.log(moveX, moveY);
-        from.style["transition"] = "transform " + rate + "ms";
-        from.style["transform"] = "perspective(500px) translate3d(" + moveX + "px, " + moveY + "px, 0px)";
-        from.setAttribute(Config_1.DRAG_ANIMATION_STATUS, "true");
-        setTimeout(function () {
-            from.removeAttribute(Config_1.DRAG_ANIMATION_STATUS);
-            from.style["transition"] = "";
-            from.style["transform"] = "";
-        }, rate);
-    },
-};
-exports.default = animation;
-
-
-/***/ }),
-
 /***/ "./src/Config.ts":
 /*!***********************!*\
   !*** ./src/Config.ts ***!
@@ -47649,7 +47614,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var Utils_1 = __importDefault(__webpack_require__(/*! ./Utils */ "./src/Utils.ts"));
 var Config_1 = __webpack_require__(/*! ./Config */ "./src/Config.ts");
-var Animation_1 = __importDefault(__webpack_require__(/*! ./Animation */ "./src/Animation.ts"));
 var dragposTargetGroup = "";
 var DragEvent = {
     // mouse down
@@ -47679,7 +47643,7 @@ var DragEvent = {
         e.preventDefault();
         e.stopPropagation();
         var store = window.dragposOptionStore, group = store.group;
-        var container = Utils_1.default.searchContainerNode(e.target), containerChildren = container.children, target = Utils_1.default.searchParentNode(containerChildren, e.target), moveTarget = document.querySelector("." + Config_1.DRAG_START_CLASS);
+        var container = Utils_1.default.searchContainerNode(e.target), containerChildren = container.children, target = Utils_1.default.searchParentNode(containerChildren, e.target), moveTarget = document.querySelector("." + Config_1.DRAG_START_CLASS), moveTargetContainer = Utils_1.default.searchContainerNode(moveTarget);
         // 노드찾기 실패 시 이벤트 무시
         if (!target)
             return;
@@ -47699,8 +47663,15 @@ var DragEvent = {
                 container.insertBefore(moveTarget, target);
             }
             // animation
-            Animation_1.default.animate(moveTarget, target, 150);
-            Animation_1.default.animate(target, moveTarget, 150);
+            // let animationRate = option.animation
+            // if (animationRate) {
+            //     Animation.animate(moveTarget, target, animationRate)
+            //     if (container === moveTargetContainer) {
+            //         Animation.animate(target, moveTarget, animationRate)
+            //     } else {
+            //         Animation.animate(target, containerChildren[targetIndex + 1] as HTMLElement, animationRate)
+            //     }
+            // }
             // Custom Listener
             if (option.onChange)
                 option.onChange(e, option);

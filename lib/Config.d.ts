@@ -21,12 +21,11 @@ export interface DragPosOptions {
     fontSize?: number;
     fontFamily?: string;
     handler?: string;
+    animation?: number;
     onDragStart?: Function;
     onDragOver?: Function;
     onDragEnd?: Function;
     onChange?: Function;
-    /** todo */
-    animation?: number;
 }
 /** mapping */
 export interface DragPosMappingCollection {
