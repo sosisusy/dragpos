@@ -2,6 +2,7 @@ import Utils from "./Utils"
 import { DRAG_START_CLASS, DragPosOptions, DRAG_ANIMATION_STATUS } from "./Config"
 import Animation from "./Animation"
 import _ from "lodash"
+import animation from "../lib/Animation"
 
 let dragposTargetGroup: string = ""
 
@@ -52,6 +53,10 @@ const DragEvent = {
         // 노드찾기 실패 시 이벤트 무시
         if (!target) return
 
+        // console.log("move", moveTarget)
+        // console.log("target", target)
+        console.log(e)
+
         // 위치 변경
         if (moveTarget !== target) {
             let targetIndex = Utils.searchChildIndex(containerChildren, target),
@@ -62,26 +67,14 @@ const DragEvent = {
             if (target.getAttribute(DRAG_ANIMATION_STATUS) || moveTarget.getAttribute(DRAG_ANIMATION_STATUS)) return
 
 
-
             // 인덱스 위치 확인 후 노드 이동
+            let animationRate = option.animation
 
-            if (targetIndex > moveTargetIndex) {
-                container.insertBefore(moveTarget, containerChildren[targetIndex + 1])
+            if (container === moveTargetContainer && targetIndex > moveTargetIndex) {
+                Animation.targetMove(container, moveTarget, containerChildren[targetIndex + 1] as HTMLElement, animationRate as number)
             } else {
-                container.insertBefore(moveTarget, target)
+                Animation.targetMove(container, moveTarget, target, animationRate as number)
             }
-
-
-            // animation
-            // let animationRate = option.animation
-            // if (animationRate) {
-            //     Animation.animate(moveTarget, target, animationRate)
-            //     if (container === moveTargetContainer) {
-            //         Animation.animate(target, moveTarget, animationRate)
-            //     } else {
-            //         Animation.animate(target, containerChildren[targetIndex + 1] as HTMLElement, animationRate)
-            //     }
-            // }
 
             // Custom Listener
             if (option.onChange) option.onChange(e, option)

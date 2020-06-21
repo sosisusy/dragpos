@@ -47561,6 +47561,56 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./src/Animation.ts":
+/*!**************************!*\
+  !*** ./src/Animation.ts ***!
+  \**************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var Config_1 = __webpack_require__(/*! ./Config */ "./src/Config.ts");
+var animation = {
+    // 애니메이션 등록
+    targetMove: function (container, moveTarget, target, rate) {
+        if (rate) {
+            // this.animate(container, moveTarget, target, rate)
+            // let move = false,
+            //     stop = false
+            // _.map(container.children, (child: HTMLElement, index) => {
+            //     if (stop) return
+            //     if (move) this.animate(container, child, container.children[index - 1] as HTMLElement, rate)
+            //     if (child === moveTarget) move = true
+            //     if (child === target) {
+            //         stop = true
+            //         move = false
+            //     }
+            // })
+        }
+        else
+            container.insertBefore(moveTarget, target);
+    },
+    // animation
+    animate: function (container, from, to, rate) {
+        var fromRect = from.getBoundingClientRect(), toRect = to.getBoundingClientRect(), moveX = toRect.left - fromRect.left, moveY = toRect.top - fromRect.top;
+        from.style["transition"] = "transform " + rate + "ms";
+        from.style["transform"] = "translate3d(" + moveX + "px, " + moveY + "px, 0px)";
+        from.setAttribute(Config_1.DRAG_ANIMATION_STATUS, "true");
+        setTimeout(function () {
+            from.removeAttribute(Config_1.DRAG_ANIMATION_STATUS);
+            from.style["transition"] = "";
+            from.style["transform"] = "";
+            container.insertBefore(from, to);
+        }, rate);
+    },
+};
+exports.default = animation;
+
+
+/***/ }),
+
 /***/ "./src/Config.ts":
 /*!***********************!*\
   !*** ./src/Config.ts ***!
@@ -47614,6 +47664,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var Utils_1 = __importDefault(__webpack_require__(/*! ./Utils */ "./src/Utils.ts"));
 var Config_1 = __webpack_require__(/*! ./Config */ "./src/Config.ts");
+var Animation_1 = __importDefault(__webpack_require__(/*! ./Animation */ "./src/Animation.ts"));
 var dragposTargetGroup = "";
 var DragEvent = {
     // mouse down
@@ -47647,6 +47698,9 @@ var DragEvent = {
         // 노드찾기 실패 시 이벤트 무시
         if (!target)
             return;
+        // console.log("move", moveTarget)
+        // console.log("target", target)
+        console.log(e);
         // 위치 변경
         if (moveTarget !== target) {
             var targetIndex = Utils_1.default.searchChildIndex(containerChildren, target), moveTargetIndex = Utils_1.default.searchChildIndex(containerChildren, moveTarget);
@@ -47656,22 +47710,13 @@ var DragEvent = {
             if (target.getAttribute(Config_1.DRAG_ANIMATION_STATUS) || moveTarget.getAttribute(Config_1.DRAG_ANIMATION_STATUS))
                 return;
             // 인덱스 위치 확인 후 노드 이동
-            if (targetIndex > moveTargetIndex) {
-                container.insertBefore(moveTarget, containerChildren[targetIndex + 1]);
+            var animationRate = option.animation;
+            if (container === moveTargetContainer && targetIndex > moveTargetIndex) {
+                Animation_1.default.targetMove(container, moveTarget, containerChildren[targetIndex + 1], animationRate);
             }
             else {
-                container.insertBefore(moveTarget, target);
+                Animation_1.default.targetMove(container, moveTarget, target, animationRate);
             }
-            // animation
-            // let animationRate = option.animation
-            // if (animationRate) {
-            //     Animation.animate(moveTarget, target, animationRate)
-            //     if (container === moveTargetContainer) {
-            //         Animation.animate(target, moveTarget, animationRate)
-            //     } else {
-            //         Animation.animate(target, containerChildren[targetIndex + 1] as HTMLElement, animationRate)
-            //     }
-            // }
             // Custom Listener
             if (option.onChange)
                 option.onChange(e, option);

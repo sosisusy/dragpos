@@ -61,6 +61,7 @@ dragpos.new({
 | fontColor | `String` | Specify font color |
 | fontSize |`Number` | Specify font size |
 | fontFamily | `String` | Specify font |
+| animation | `Number` | Animation rate |
    
    
 |Listener|Params|   |

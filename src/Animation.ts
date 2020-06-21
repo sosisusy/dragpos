@@ -1,16 +1,29 @@
 import { DRAG_ANIMATION_STATUS } from "./Config"
+import _ from "lodash"
 
-
-let adump = [] as Array<any>
 
 const animation = {
     // 애니메이션 등록
-    push() {
+    targetMove(container: HTMLElement, moveTarget: HTMLElement, target: HTMLElement, rate: number) {
+        if (rate) {
+            // this.animate(container, moveTarget, target, rate)
 
+            // let move = false,
+            //     stop = false
+            // _.map(container.children, (child: HTMLElement, index) => {
+            //     if (stop) return
+            //     if (move) this.animate(container, child, container.children[index - 1] as HTMLElement, rate)
+            //     if (child === moveTarget) move = true
+            //     if (child === target) {
+            //         stop = true
+            //         move = false
+            //     }
+            // })
+        } else container.insertBefore(moveTarget, target)
     },
 
     // animation
-    animate(from: HTMLElement, to: HTMLElement, rate: number) {
+    animate(container: HTMLElement, from: HTMLElement, to: HTMLElement, rate: number) {
         const fromRect = from.getBoundingClientRect(),
             toRect = to.getBoundingClientRect(),
             moveX = toRect.left - fromRect.left,
@@ -20,13 +33,12 @@ const animation = {
         from.style["transform"] = `translate3d(${moveX}px, ${moveY}px, 0px)`
         from.setAttribute(DRAG_ANIMATION_STATUS, "true")
 
-        adump.push(
-            setTimeout(() => {
-                from.removeAttribute(DRAG_ANIMATION_STATUS)
-                from.style["transition"] = ""
-                from.style["transform"] = ""
-            }, rate)
-        )
+        setTimeout(() => {
+            from.removeAttribute(DRAG_ANIMATION_STATUS)
+            from.style["transition"] = ""
+            from.style["transform"] = ""
+            container.insertBefore(from, to)
+        }, rate)
     },
 }
 
