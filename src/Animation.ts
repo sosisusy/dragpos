@@ -5,21 +5,23 @@ import _ from "lodash"
 const animation = {
     // 애니메이션 등록
     targetMove(container: HTMLElement, moveTarget: HTMLElement, target: HTMLElement, rate: number) {
-        if (rate) {
-            // this.animate(container, moveTarget, target, rate)
+        // if (rate) {
+        // this.animate(container, moveTarget, target, rate)
 
-            // let move = false,
-            //     stop = false
-            // _.map(container.children, (child: HTMLElement, index) => {
-            //     if (stop) return
-            //     if (move) this.animate(container, child, container.children[index - 1] as HTMLElement, rate)
-            //     if (child === moveTarget) move = true
-            //     if (child === target) {
-            //         stop = true
-            //         move = false
-            //     }
-            // })
-        } else container.insertBefore(moveTarget, target)
+        // let move = false,
+        //     stop = false
+        // _.map(container.children, (child: HTMLElement, index) => {
+        //     if (stop) return
+        //     if (move) this.animate(container, child, container.children[index - 1] as HTMLElement, rate)
+        //     if (child === moveTarget) move = true
+        //     if (child === target) {
+        //         stop = true
+        //         move = false
+        //     }
+        // })
+        // } else container.insertBefore(moveTarget, target)
+
+        container.insertBefore(moveTarget, target)
     },
 
     // animation
