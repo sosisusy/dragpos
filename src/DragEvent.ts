@@ -1,8 +1,7 @@
 import Utils from "./Utils"
-import { DRAG_START_CLASS, DragPosOptions, DRAG_ANIMATION_STATUS } from "./Config"
+import { DRAG_START_CLASS, DragPosOptions, DRAG_ANIMATION_STATUS, DRAG_KEY_ATTRIBUTE } from "./Config"
 import Animation from "./Animation"
 import _ from "lodash"
-import animation from "../lib/Animation"
 
 let dragposTargetGroup: string = ""
 
@@ -41,9 +40,6 @@ const DragEvent = {
         e.preventDefault()
         e.stopPropagation()
 
-        const store = window.dragposOptionStore,
-            group = store.group
-
         let container = Utils.searchContainerNode(e.target as HTMLElement) as HTMLElement,
             containerChildren = container.children,
             target = Utils.searchParentNode(containerChildren, e.target as HTMLElement) as HTMLElement,
@@ -51,44 +47,36 @@ const DragEvent = {
             moveTargetContainer = Utils.searchContainerNode(moveTarget) as HTMLElement
 
         // 노드찾기 실패 시 이벤트 무시
-        if (!target) return
+        if (!target || !container.getAttribute(DRAG_KEY_ATTRIBUTE) || !moveTargetContainer.getAttribute(DRAG_KEY_ATTRIBUTE)) return
 
-        // console.log("move", moveTarget)
-        // console.log("target", target)
-        console.log(e)
+        const moveTargetPrimaryKey = moveTargetContainer.getAttribute(DRAG_KEY_ATTRIBUTE) as string,
+            moveTargetOption = Utils.getOption(moveTargetPrimaryKey)
 
         // 위치 변경
         if (moveTarget !== target) {
-            let targetIndex = Utils.searchChildIndex(containerChildren, target),
-                moveTargetIndex = Utils.searchChildIndex(containerChildren, moveTarget)
-
             // 이동 노드의 그룹과 오버된 노드의 그룹이 다른 경우 무시
-            if (dragposTargetGroup && group[dragposTargetGroup].indexOf(option.key as string) === -1) return
+            if (moveTargetOption.group !== option.group) return
             if (target.getAttribute(DRAG_ANIMATION_STATUS) || moveTarget.getAttribute(DRAG_ANIMATION_STATUS)) return
 
-
-            // 인덱스 위치 확인 후 노드 이동
-            let animationRate = option.animation
-
-            if (container === moveTargetContainer && targetIndex > moveTargetIndex) {
-                Animation.targetMove(container, moveTarget, containerChildren[targetIndex + 1] as HTMLElement, animationRate as number)
-            } else {
-                Animation.targetMove(container, moveTarget, target, animationRate as number)
-            }
+            // 이동
+            Animation.targetMove(container, moveTarget, target, moveTargetOption.animation as number)
 
             // Custom Listener
-            if (option.onChange) option.onChange(e, option)
+            if (moveTargetOption.onChange) moveTargetOption.onChange(e, moveTargetOption)
         }
 
         // Custom Listener
-        if (option.onDragOver) option.onDragOver(e, option)
+        if (moveTargetOption.onDragOver) moveTargetOption.onDragOver(e, moveTargetOption)
     },
 
     /**
      * drag end
      */
     handleDragEnd(e: Event, option: DragPosOptions) {
-        let moveTarget = document.querySelector(`.${DRAG_START_CLASS}`) as HTMLElement
+        const moveTarget = document.querySelector(`.${DRAG_START_CLASS}`) as HTMLElement,
+            moveTargetContainer = Utils.searchContainerNode(moveTarget) as HTMLElement,
+            moveTargetPrimaryKey = moveTargetContainer.getAttribute(DRAG_KEY_ATTRIBUTE) as string,
+            moveTargetOption = Utils.getOption(moveTargetPrimaryKey)
 
         // 드래그 클래스 삭제
         if (moveTarget) moveTarget.classList.remove(DRAG_START_CLASS)
@@ -97,7 +85,7 @@ const DragEvent = {
         moveTarget.removeAttribute("draggable")
 
         // Custom Listener
-        if (option.onDragEnd) option.onDragEnd(e, option)
+        if (moveTargetOption.onDragEnd) moveTargetOption.onDragEnd(e, moveTargetOption)
     },
 }
 

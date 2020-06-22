@@ -6,10 +6,9 @@ export const LOOP_LIMIT = 100
 
 /** default */
 // 기본 그룹명
-export const DefaultGroup = "dragposPublicGroup"
 // 옵션 기본 값
 export const DefaultOption: DragPosOptions = {
-    group: DefaultGroup
+    // 
 }
 
 

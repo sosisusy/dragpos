@@ -27,12 +27,14 @@ const Utils = {
 
     // 노드 인덱스 반환
     searchChildIndex(children: HTMLCollection, ele: HTMLElement): number {
-        let childIndex = -1
-        _.map(children, (child, i) => {
-            if (child === ele) childIndex = i
-        })
-        return childIndex
+        return _.findIndex(children, (e, i) => e === ele)
     },
+
+    // 옵션 가져오기
+    getOption(primaryKey: string) {
+        const optionIndex = window.dragposOptionStore.mapping[primaryKey]
+        return window.dragposOptionStore.options[optionIndex]
+    }
 }
 
 export default Utils
