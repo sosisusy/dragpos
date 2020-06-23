@@ -12,6 +12,8 @@ const animation = {
         const moveTargetContainer = Utils.searchContainerNode(moveTarget) as HTMLElement,
             moveTargetContainerChildren = moveTargetContainer.children,
             containerChildren = container.children
+        let moveTargetIndex = Utils.searchChildIndex(container.children, moveTarget),
+            targetIndex = Utils.searchChildIndex(container.children, target)
 
         for (let d of aniDump) {
             clearTimeout(d)
@@ -44,8 +46,6 @@ const animation = {
                     }, rate)
                 )
             } else {
-                let moveTargetIndex = Utils.searchChildIndex(container.children, moveTarget),
-                    targetIndex = Utils.searchChildIndex(container.children, target)
 
                 // 아래로 이동
                 if (moveTargetIndex < targetIndex) {
@@ -73,7 +73,14 @@ const animation = {
                     )
                 }
             }
-        } else container.insertBefore(moveTarget, target)
+        } else {
+
+            if (moveTargetContainer !== container || moveTargetIndex > targetIndex) {
+                container.insertBefore(moveTarget, target)
+            } else {
+                container.insertBefore(moveTarget, containerChildren[targetIndex + 1])
+            }
+        }
 
     },
 
