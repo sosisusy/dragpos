@@ -51,6 +51,12 @@ dragpos.new({
 })
 ```
 
+#### method
+| Method | Params |     |
+|:----|:----|:----|
+| constructor | `element`, `option` | Create new list helper |
+| new | `option` | Create new list helper |
+
 #### option
 | Attribute | Type |     |
 |:----|:----|:----|

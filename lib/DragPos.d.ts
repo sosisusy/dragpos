@@ -14,6 +14,6 @@ declare class DragPos {
     /**
      * 동작
      */
-    runDragPos(option: DragPosOptions): void;
+    private runDragPos;
 }
 export default DragPos;

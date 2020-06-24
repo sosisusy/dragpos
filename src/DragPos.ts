@@ -81,7 +81,7 @@ class DragPos {
     /**
      * 동작
      */
-    runDragPos(option: DragPosOptions) {
+    private runDragPos(option: DragPosOptions) {
         option = { ...DefaultOption, ...option }
         let ele = option.ele as HTMLElement | string
 
